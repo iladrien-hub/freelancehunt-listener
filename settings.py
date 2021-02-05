@@ -7,10 +7,3 @@ LISTENING_TIMEOUT = 60
 
 CACHE_DIR = ".cache/"
 SETTINGS = "settings.json"
-
-CATEGORIES = [
-    {
-        "url": "https://freelancehunt.com/projects/skill/parsing-dannyih/169.html",
-        "file": "parsing",
-    },
-]
