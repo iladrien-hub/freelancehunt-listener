@@ -5,10 +5,8 @@ HEADERS = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 LISTENING_TIMEOUT = 60
 
-BOT_TOKEN = "1615794952:AAHtEjN1ep8DK8YqLhlL46pKEkjcFfxECJM"
-ADMIN_ID = 665239470
-
 CACHE_DIR = ".cache/"
+SETTINGS = "settings.json"
 
 CATEGORIES = [
     {

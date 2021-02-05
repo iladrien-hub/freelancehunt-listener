@@ -52,10 +52,10 @@ class FreelanceHuntParser:
         project = soup.find("table", class_="project-list").find("tr", class_=None)
         title_ref = project.find("a", class_="visitable")
         name = title_ref.get_text(strip=True)
-        last_project = FreelanceHuntParser.load_last_project(category["file"])
+        last_project = FreelanceHuntParser.load_last_project(category["name"])
         if name != last_project:
             logging.info(f"New project found: \"{last_project}\" -> \"{name}\"")
-            FreelanceHuntParser.save_last_project(name, category["file"])
+            FreelanceHuntParser.save_last_project(name, category["name"])
             url = title_ref.get("href")
             result = {
                 "name": name,
