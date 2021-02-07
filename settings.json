@@ -1,10 +1,11 @@
 {
-  "bot": "1615794952:AAHtEjN1ep8DK8YqLhlL46pKEkjcFfxECJM",
   "admin": 665239470,
+  "bot": "1615794952:AAHtEjN1ep8DK8YqLhlL46pKEkjcFfxECJM",
   "categories": [
     {
-      "url": "https://freelancehunt.com/projects/skill/parsing-dannyih/169.html",
-      "name": "parsing"
+      "name": "parsing",
+      "url": "https://freelancehunt.com/projects/skill/parsing-dannyih/169.html"
     }
-  ]
+  ],
+  "timeout": 60
 }
