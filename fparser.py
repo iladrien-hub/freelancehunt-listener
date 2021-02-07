@@ -1,4 +1,5 @@
 import logging
+import threading
 import time
 
 import requests
@@ -26,14 +27,29 @@ def get_project_budget(project):
     return budget.get_text(strip=True)
 
 
+def synchronized(method):
+    outer_lock = threading.Lock()
+    lock_name = "__" + method.__name__ + "_lock" + "__"
+
+    def sync_method(self, *args, **kws):
+        with outer_lock:
+            if not hasattr(self, lock_name): setattr(self, lock_name, threading.Lock())
+            lock = getattr(self, lock_name)
+            with lock:
+                return method(self, *args, **kws)
+
+    return sync_method
+
+
 class FreelanceHuntParser:
 
-    def __init__(self, categories, eventloop=None, on_project_listener=None):
+    def __init__(self, categories, timeout=10, eventloop=None, on_project_listener=None):
         logging.info("Initializing parser...")
         self.on_project_listener = on_project_listener
         self.url = categories
         self.loop = eventloop
         self.categories = categories
+        self.timeout = timeout
 
     def listen(self):
         logging.info("Starting listening...")
@@ -42,7 +58,11 @@ class FreelanceHuntParser:
                 project = self.parse(category)
                 if project is not None:
                     self.loop.create_task(self.on_project_listener(project))
-            time.sleep(settings.LISTENING_TIMEOUT)
+            time.sleep(self.timeout)
+
+    @synchronized
+    def set_timeout(self, timeout):
+        self.timeout = timeout
 
     @staticmethod
     def parse(category):
